@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { json } from 'react-router'
 
 const AddEmploye = () => {
   const [firstName, setFirstName] = useState("")
@@ -8,13 +9,28 @@ const AddEmploye = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    //prepare data to send to the server
     const data = {
       first_name: firstName,
       last_name: lastName,
       email: emailAddress,
       password: password
     }
+
+    //now send data to the server
+    const apiUrl = "http://localhost:4000/add-employee"
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    };
+    const response = fetch(apiUrl, requestOptions)
+    response.then(res => res.json())
+      .then(res => {
+        console.log(res)
+      })
   }
+
 
   return (
     <div>

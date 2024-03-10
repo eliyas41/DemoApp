@@ -3,9 +3,13 @@ var express = require('express');
 //import mysql package and create connection pool
 var mysql2 = require('mysql2');
 //set up the port listen to
+//import cors
+var app = express();
+var cors = require("cors");
+app.use(cors());
+
 const port = 4000;
 //create express app
-var app = express();
 
 //configure database
 let dbConfig = {
