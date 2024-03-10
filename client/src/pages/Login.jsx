@@ -3,10 +3,11 @@ import React, { useState } from 'react'
 const Login = () => {
   const [emailAddress, setEmailAddress] = useState('')
   const [password, setPassword] = useState('')
+  const [msg, setMsg] = useState("")
   // console.log(emailAddress)
   // console.log(password)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     //collect data to send to database 
     const data = {
@@ -23,13 +24,21 @@ const Login = () => {
     const response = fetch(apiUrl, requestOptions)
     response.then(res => res.json())
       .then(res => {
-        console.log(res)
+        console.log(res.message)
+        setMsg(res.message)
+        if (res.status === "success") {
+          window.location.href = "/"
+        }
       })
+      .catch((error) => {
+        setMsg(`Error: ${error}`)
+      });
   }
 
   return (
     <div>
       <h1>Login</h1>
+      <small style={{ color: "green" }}>{msg}</small><br />
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email:</label> <br />
