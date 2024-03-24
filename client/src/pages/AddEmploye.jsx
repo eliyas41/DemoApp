@@ -6,6 +6,7 @@ const AddEmploye = () => {
   const [lastName, setLastName] = useState("")
   const [emailAddress, setEmailAddress] = useState("")
   const [password, setPassword] = useState("")
+  const [message, setMessage] = useState("")
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -27,13 +28,19 @@ const AddEmploye = () => {
     const response = fetch(apiUrl, requestOptions)
     response.then(res => res.json())
       .then(res => {
-        console.log(res)
+        console.log(res.status)
+        setMessage(res.message)
+        if (res.status === "Success") {
+          window.location.href = "/"
+        }
       })
   }
 
 
   return (
     <div>
+      <small style={{ color: "red" }}>{message}</small>
+
       <h1>Add employee</h1>
 
       <form onSubmit={handleSubmit} action="">

@@ -14,8 +14,8 @@ const port = 4000;
 //configure database
 let dbConfig = {
   connectionLimit: 10,
-  database: 'demoapp',
-  user: 'demoapp',
+  database: 'demo_app',
+  user: 'demo_app',
   host: 'localhost',
   password: '12345678'
 };
